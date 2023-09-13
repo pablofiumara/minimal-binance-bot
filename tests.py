@@ -10,9 +10,10 @@ class MovingAverageStrategyTests(unittest.TestCase):
     def setUp(self):
         self.strategy = MovingAverageStrategy()
    
-    def test_get_moving_average(self):
-        client = Mock()
-        client.get_historical_klines.return_value = [
+    @patch("binance.client.Client")
+    def test_get_moving_average(self, mocked_binance_client):
+        
+        mocked_binance_client.get_historical_klines.return_value = [
             [0, 0, 0, 0, 1],
             [0, 0, 0, 0, 2],
             [0, 0, 0, 0, 3],
@@ -20,7 +21,7 @@ class MovingAverageStrategyTests(unittest.TestCase):
             [0, 0, 0, 0, 5],
         ]
 
-        result = self.strategy.get_moving_average(client, "BTCUSDT", "1d", 5)
+        result = self.strategy.get_moving_average(mocked_binance_client, "BTCUSDT", "1d", 5)
 
         self.assertEqual(result, Decimal("3"))
 
