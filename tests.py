@@ -20,7 +20,7 @@ class MovingAverageStrategyTests(unittest.TestCase):
             [0, 0, 0, 0, 5],
         ]
 
-        result = self.strategy.get_moving_average(client, 'BTCUSDT', '1d', 5)
+        result = self.strategy.get_moving_average(client, "BTCUSDT", "1d", 5)
 
         self.assertEqual(result, Decimal("3"))
 
